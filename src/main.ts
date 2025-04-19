@@ -21,10 +21,14 @@ async function doSomethingWithTools() {
         }
       };
 
-    const result = await callTool(request);
-    if (result) {
-        console.log(`Successfully called tool: ${JSON.stringify(result)}`);
+    for (var i = 0; i < 500; i++) {
+        console.log(`Calling tool ${i + 1}...`);
+        const result = await callTool(request);
+        if (result) {
+          console.log(`Successfully called tool: ${JSON.stringify(result)}`);
+      }
     }
+    
 
 }
 
