@@ -1,0 +1,31 @@
+// tsconfig.json
+{
+    "compilerOptions": {
+      /* Base Options: */
+      "esModuleInterop": true, // Enables compatibility with CommonJS modules
+      "skipLibCheck": true, // Skip type checking of declaration files
+      "target": "ES2022", // Target modern ECMAScript features
+      "allowJs": true, // Allow JavaScript files to be compiled
+      "resolveJsonModule": true, // Allow importing JSON files
+      "moduleDetection": "force", // Treat files as modules
+      "isolatedModules": true, // Ensure files can be safely transpiled without relying on other imports
+  
+      
+      /* Strictness */
+      "strict": true, // Enable all strict type-checking options
+      "noUncheckedIndexedAccess": true, // Add 'undefined' to index signatures
+  
+      /* If NOT transpiling with Babel: */
+      "module": "NodeNext", // Use Node.js's native ECMAScript modules
+      "outDir": "./dist", // Output directory for compiled files
+      "rootDir": "./src", // Specify the root directory of input files
+  
+      /* If your code relies on DOM APIs: */
+      // "lib": ["ES2022", "DOM", "DOM.Iterable"],
+      /* If you're NOT using DOM APIs: */
+       "lib": ["ES2022"]
+    },
+    "include": ["src/**/*"], // Compile all files within the src directory
+    "exclude": ["node_modules", "dist"] // Exclude these directories
+  }
+  
