@@ -139,7 +139,7 @@ export async function callTool(request: CallToolRequest): Promise<CallToolResult
       return result;
 
     } catch (error) {
-      console.log(`Error calling notification tool: ${error}`);
+        await connectInternal();
       return undefined; // Indicate failure
     }
   }

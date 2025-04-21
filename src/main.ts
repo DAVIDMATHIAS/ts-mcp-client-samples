@@ -23,6 +23,8 @@ async function doSomethingWithTools() {
 
     for (var i = 0; i < 500; i++) {
         console.log(`Calling tool ${i + 1}...`);
+        // sleep for 3 seconds
+        await new Promise(resolve => setTimeout(resolve, 1000));
         const result = await callTool(request);
         if (result) {
           console.log(`Successfully called tool: ${JSON.stringify(result)}`);
