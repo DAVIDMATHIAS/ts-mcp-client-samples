@@ -14,17 +14,19 @@ async function doSomethingWithTools() {
     const request: CallToolRequest = {
         method: 'tools/call',
         params: {
-          name: 'studentDetails',
+          name: 'get_file_contents',
           arguments: {
-            studentId: 1003, // 1 second between notifications
+            owner: 'opencode-ai',
+            repo: 'opencode',
+            path: 'README.md', // 1 second between notifications
           }
         }
       };
 
-    for (var i = 0; i < 500; i++) {
+    for (var i = 0; i < 25; i++) {
         console.log(`Calling tool ${i + 1}...`);
         // sleep for 3 seconds
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 2000));
         const result = await callTool(request);
         if (result) {
           console.log(`Successfully called tool: ${JSON.stringify(result)}`);

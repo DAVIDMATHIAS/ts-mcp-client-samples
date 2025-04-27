@@ -1,5 +1,6 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import {
     ListToolsRequest,
     ListToolsResultSchema,
@@ -25,10 +26,27 @@ async function connectInternal(): Promise<Client> {
         name: 'singleton-sse-client', // Give it a descriptive name
         version: '1.0.0'
     });
-    const sseTransport = new SSEClientTransport(new URL(BASE_URL));
+    //const sseTransport = new SSEClientTransport(new URL(BASE_URL));
 
+    /* 
+    "command": "/home/davidmathias/opensource/github-mcp-server/github-mcp-server",
+            "args": [
+                "stdio"
+            ],
+            "env": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "xyzzz"
+            }
+    */
+    const transport = new StdioClientTransport({
+        command: "/home/davidmathias/opensource/github-mcp-server/github-mcp-server",
+        args: ["stdio"],
+        env: {
+            "GITHUB_PERSONAL_ACCESS_TOKEN": "dummy-10-16T20:23:14Z",
+        }
+      });
+      
     try {
-        await client.connect(sseTransport);
+        await client.connect(transport);
         console.log("Connected using SSE transport");
         return client;
     } catch (error) {
@@ -139,7 +157,7 @@ export async function callTool(request: CallToolRequest): Promise<CallToolResult
       return result;
 
     } catch (error) {
-        await connectInternal();
+      console.log(`Error calling notification tool: ${error}`);
       return undefined; // Indicate failure
     }
   }
